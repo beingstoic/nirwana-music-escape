@@ -6,11 +6,10 @@ const userCollection = mongoCollections.user_collection;
 const jwt = require("jsonwebtoken");
 const { ObjectId } = require("mongodb");
 
-const createPlaylistObject = async()=>{
+const createPlaylistObject = async(obj)=>{
     let playlistId = new ObjectId()
     let playlist = {
       _id: playlistId,
-      userId: obj.userId, 
       playlistName: obj.playlistName,
       description: obj.description,
       songs:[]
@@ -18,22 +17,18 @@ const createPlaylistObject = async()=>{
     return playlist;
   }
 
-const createPlaylist = async (obj) => {
+const createPlaylist = async (userId, obj) => {
     let playlist = await createPlaylistObject(obj);
-        //checkUserObject(playlist)
+    //checkUserObject(playlist)
     const users = await userCollection();
-    const user = await users.findOne({ _id: Object(playlist.userId)})
+    const user = await users.findOne({ _id: new ObjectId(userId)})
     if (user == null) throw "No user with that id";
-
     const updateInfo = await users.updateOne(
-        //find the userId according to one of input parameter
-        {_id: Object(playlist.userId)},
-        //make nested object at previous user attribute playlist
-        {$addToSet: {playlist: playlist}}
+        {_id: ObjectId(userId)},
+        {$push: {playlist: playlist}}
     );
     if (updateInfo.modifiedCount === 0) throw " Could not add playlist successfully "
-    playlist['token'] = generateToken(playlist.userId)
-    return{playlistInserted:true}
+    return playlist;
     };
 
 
@@ -47,14 +42,10 @@ const getAllPlaylist = async (userId) => {
         {_id : ObjectId(userId)}, 
         {projection:{playlist:1, _id:0}}).toArray();
 
-    if(allPlaylist.length === 0) throw " No playlist yet "
-        return allPlaylist[0].playlist;
+    if(allPlaylist[0].playlist.length === 0) throw " No playlist yet "
+    return allPlaylist[0].playlist;
 }
 
-
-const generateToken = (id) => {
-    return jwt.sign({ id }, "HeavenOnEarth", { expiresIn: "30d" });
-    };
 
 module.exports = {
     createPlaylistObject,
