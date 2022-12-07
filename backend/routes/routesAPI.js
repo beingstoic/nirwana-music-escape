@@ -14,15 +14,14 @@ const protectedArea= asyncHandler(async (req, res) => {
 })
 
 
-router.route("/").get(async (req, res) => {
-  if (req.session.user) return res.redirect("/protected");
-  res.status(401).send('dkjhfrwej');
-});
+// router.route("/").get(async (req, res) => {
+//   if (req.session.user) return res.redirect("/protected");
+//   res.status(401).send('dkjhfrwej');
+// });
 
 router
   .route("/register")
   .get(async (req, res) => {
-    if (req.session.user) return res.redirect("/protected");
     res.render("userRegister", { title: "Register" });
   })
   .post(async (req, res) => {
@@ -30,7 +29,7 @@ router
       let response = await usersData.createUser(req.body);
       return res.status(201).json(response);
     } catch (error) {
-      res.sendStatus(400);
+      res.send(400).json(error);
     }
   });
 
@@ -48,14 +47,6 @@ router.route("/login").post(async (req, res) => {
 
 router.get('/protected', protect, protectedArea);
 
-router.route("/logout").get(async (req, res) => {
-  if (req.session.user) {
-    res.clearCookie("AuthCookie");
-    res.status(200).send(`Successfully logged out`);
-  } else {
-    res.redirect("/");
-  }
-});
 
 
 module.exports = router;
