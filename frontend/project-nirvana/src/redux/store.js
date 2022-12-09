@@ -5,10 +5,6 @@ import { userReducer } from './users/userReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {logger} from 'redux-logger'
 
-// const reducer = combineReducers({
-//     reducer,
-//     middleware: [...getDefaultMiddleware()]
-// })
 
 const store = createStore(
     userReducer,
