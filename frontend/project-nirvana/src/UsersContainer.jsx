@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers } from './redux/users/userActions'
+import { fetchUsers, userRegistrationAPICall } from './redux/users/userActions'
 
-function UsersContainer ({ userData, fetchUsers }) {
+function UsersContainer ({ userData, fetchUsers, userRegistrationAPICall }) {
+  const obj={
+    userName: "ABCDEFFG",
+    password: "Year@2022",
+    firstName: "rishabh",
+    lastName: "goyal",
+    phoneNumber: 34095345834
+  }
   useEffect(() => {
-    fetchUsers()
+  userRegistrationAPICall(obj)
   }, [])
   return userData.loading ? (
     <h2>Loading</h2>
-  ) : userData.error ? (
+  ) : userData.error ? ( 
     <h2>{userData.error}</h2>
   ) : (
     <div>
@@ -31,7 +38,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUsers: () => dispatch(fetchUsers())
+    fetchUsers: () => dispatch(fetchUsers()),
+    userRegistrationAPICall:(obj)=>dispatch(userRegistrationAPICall(obj))
+
   }
 }
 
