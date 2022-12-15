@@ -5,21 +5,23 @@ import "./main.css";
 import Header from "../../components/Header/Header";
 import { Routes, Router, Route, Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
+import Homepage from "../Homepage/Homepage";
 import SignInAndSignUpPage from "../sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CreatePlaylist from "../add-playlist/CreatePlaylist";
 
 const drawerWidth = 250;
 const Main = (props) => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", overflowY: "hidden" }}
-    >
-      <div style={{ display: "flex", overflowY: "scroll" }}>
+    <div className="main">
+      <div style={{ display: "flex" }}>
         <ResponsiveDrawer style={{ backgroundColor: "#040404" }} />
 
         <div className="body-container">
           <Header />
           <Routes>
+            <Route path="/" element={<Homepage />}></Route>
             <Route path="/signin" element={<SignInAndSignUpPage />}></Route>
+            <Route path="/create-playlist" element={<CreatePlaylist />}></Route>
           </Routes>
         </div>
       </div>
