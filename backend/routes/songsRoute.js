@@ -9,7 +9,7 @@ router
   .get(async (req, res) => {
     try{
       console.log("here")
-      let response = await songsData.fetchSongs();
+      let response = await songsData.fetchSongs(req.query.sort_by);
       return res.status(200).json(response);
     } catch (error) {
       return res.send(400).json(error);
@@ -26,6 +26,17 @@ router
     }
   })
 
+  router
+  .route("/fetchSongForPlaylistForm")
+  .get(async (req, res) => {
+    try{
+      console.log("here")
+      let response = await songsData.fetchSongForPlaylistForm();
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.sendStatus(400);
+    }
+  })
 router
   .route("/:id")
   .get(async (req, res) => {
@@ -47,7 +58,12 @@ router
     }
   });
 
+  
+
+
+
 module.exports = router;
+
 
 
 // handle response codes
