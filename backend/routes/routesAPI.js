@@ -30,15 +30,14 @@ router
       let password = req.body.password
       validateUsernameNPassword(userName, password);
     } catch (e) {
-      return res
-        .status(400)
-        .render("userRegister", { title: "Register", error: e });
+
+      res.status(400).json(e);//using send will crash the code in edge case
     }
     try{
       let response = await usersData.createUser(req.body);
       return res.status(201).json(response);
     } catch (error) {
-      res.status(400).json(error);//using send will crash the code in edge case
+      return res.status(400).json(error);//using send will crash the code in edge case
     }
   });
 
@@ -49,15 +48,14 @@ router.route("/login").post(async (req, res) => {
   try {
     validateUsernameNPassword(userName, password);
   } catch (e) {
-    return res
-      .status(400)
-      .render("userLogin", { title: "Login", error: e });
+    console.log("e",e)
+    return res.status(400).json(e);//using send will crash the code in edge case
   }
   try {
     let response = await usersData.checkUser(userName, password);
     return res.status(200).json(response)
   } catch (error) {
-    res.status(400).json(error);
+    return res.status(400).json(error);
   }
 });
 

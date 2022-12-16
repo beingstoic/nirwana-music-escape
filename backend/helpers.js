@@ -225,7 +225,7 @@ const checkUserObject = (user) => {
 };
 
 const validateUsernameNPassword = (username, password) => {
-  const RegExp = /^[A-Za-z0-9]*$/;
+  const RegExp = /^[A-Za-z0-9@.]*$/;
   if (!username) throw "please provide the username";
   if (typeof username !== "string") throw "username must be of string type";
   if (username.match(/\s/)) throw "username cannot have empty spaces";
@@ -289,7 +289,6 @@ const validateCreateUserObject = (
       }
 };
 
-
 module.exports = {
   isValidObject,
   isProperString,
@@ -303,9 +302,10 @@ module.exports = {
   checkRuntime,
   isPasswordValid,
   checkUserObject,
-  checkPlistName,
-  checkObjectId,
-  checkPlistObj,
   validateUsernameNPassword,
   validateCreateUserObject,
+  checkUserObject,
+  checkPlistName,
+  checkObjectId,
+  checkPlistObj
 };
