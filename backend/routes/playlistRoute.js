@@ -16,6 +16,8 @@ const playlistData = data.playlistsData;
     .route("/:userId")
     .get(async (req, res) => {
       try{
+        // TO DO: ADD userId fiekld validation in another try cath
+
         //helper
       }catch(e){
         return res.status(400).json({ error:e });
@@ -32,6 +34,8 @@ const playlistData = data.playlistsData;
         const playlistPost = req.body
         try{
             //helper
+            // TO DO: ADD req.params.userId, req.body fiekld validation in another try cath
+
             let response = await playlistData.createPlaylist(req.params.userId, req.body);
             return res.status(201).json(response)
         } catch (e) {
@@ -42,6 +46,7 @@ router
     .route('/playlist/:playlistId')
     .get(async (req, res) => {
       //const playlistPutData = req.body;
+      // TO DO: Add playlistId validation in another try catch 
       try{
         let response = await playlistData.getPlaylist(req.params.playlistId);
         return res.status(200).json(response)
@@ -51,6 +56,8 @@ router
     })
     .put(async (req, res) => {
       //const playlistPutData = req.body;
+            // TO DO: Add req.params.playlistId, req.body validation in another try catch 
+
       try{
         let response = await playlistData.modifyPlaylist(req.params.playlistId, req.body);
         return res.status(200).json(response)
@@ -60,6 +67,8 @@ router
     })
     .delete(async (req, res) => {
       try{
+                    // TO DO: Add req.params.playlistId in another try catch 
+
         let response = await playlistData.deletePlaylist(req.params.playlistId);
         return res.status(200).json(response)
       }catch (e) {
@@ -71,6 +80,8 @@ router
     .route('/playlist/:playlistId/songs/:songId')
     .post(async (req, res) => { 
       try{
+                    // TO DO: Add req.params.playlistId, req.body validation in another try catch 
+
           let response = await playlistData.addSongs(req.params.playlistId, req.params.songId);
           return res.status(201).json(response)
       } catch (e) {
@@ -80,6 +91,8 @@ router
 
     .delete(async (req, res) => {
       try{
+                    // TO DO: Add req.params.playlistId, req.body validation in another try catch 
+
         let response = await playlistData.deleteSongs(req.params.playlistId, req.params.songId);
         return res.status(200).json(response)
       }catch (e) {

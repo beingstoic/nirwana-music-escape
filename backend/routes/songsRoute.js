@@ -9,6 +9,7 @@ router
   .get(async (req, res) => {
     try{
       console.log("here")
+      // TO DO: ADD sort_by fiekld validation in another try cath
       let response = await songsData.fetchSongs(req.query.sort_by);
       return res.status(200).json(response);
     } catch (error) {
@@ -17,6 +18,8 @@ router
   })
   .post(async (req, res) => {
     try{
+      // TO DO: ADD re.body field validation in another try cath
+
       console.log("req.body",req.body)
       let response = await songsData.uploadSong(req.body);
       return res.status(201).json(response);
@@ -42,6 +45,8 @@ router
   .get(async (req, res) => {
     try{
       console.log("here")
+      // TO DO: ADD id validation in another try cath
+
       let response = await songsData.fetchSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
@@ -51,6 +56,8 @@ router
   })
   .delete(async (req, res) => {
     try{
+    // TO DO: ADD id fiekld validation in another try cath
+
       let response = await songsData.deleteSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
