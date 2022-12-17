@@ -10,9 +10,10 @@ import CreatePlaylist from "../add-playlist/CreatePlaylist";
 import LoginPage from "../login/login-page.component";
 import RegisterPage from "../register/register-page.component";
 import MusicPlayer from "../../components/music-player/MusicPlayer";
-
+ 
 const loggedIn = false;
 const Main = (props) => {
+  console.log('rerender')
   return (
     <div className="main">
       
@@ -29,7 +30,7 @@ const Main = (props) => {
           </Routes>
         </div>
       </div>
-      {(<MusicPlayer />)}
+      <MusicPlayer />
     </div>
   );
 };
