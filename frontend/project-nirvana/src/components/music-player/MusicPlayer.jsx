@@ -29,7 +29,7 @@ const MusicPlayer = ({playerSong}) => {
     setVolume(event.target.value);
     audioRef.current.volume = event.target.value;
   };
-
+  
  const handlePlay=()=>{
   if (typeof playerSong !== "undefined" && Object.keys(playerSong).length > 0) {
     setMusicObj(playerSong.playerSong)
