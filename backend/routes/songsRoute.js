@@ -20,28 +20,6 @@ const fetchSongs= asyncHandler(async (req, res) => {
   }
 })
 
-<<<<<<< Updated upstream
-      console.log("req.body",req.body)
-      let response = await songsData.uploadSong(req.body);
-      return res.status(201).json(response);
-    } catch (error) {
-      console.log("error",error)
-      return res.status(400).json(error);
-    }
-  })
-
-  router
-  .route("/fetchSongForPlaylistForm")
-  .get(async (req, res) => {
-    try{
-      console.log("here")
-      let response = await songsData.fetchSongForPlaylistForm();
-      return res.status(200).json(response);
-    } catch (error) {
-      return res.status(400);
-    }
-  })
-=======
 const uploadSong = asyncHandler(async (req, res) => {
   try{
     // TO DO: ADD re.body field validation in another try cath
@@ -67,7 +45,6 @@ const fetchSongForPlaylistForm = asyncHandler(async (req, res) => {
 router.get('/', protect, fetchSongs)
 router.post('/', protect, uploadSong)
 router.get("/fetchSongForPlaylistForm", protect, fetchSongForPlaylistForm)
->>>>>>> Stashed changes
 router
   .route("/:id")
   .get(async (req, res) => {

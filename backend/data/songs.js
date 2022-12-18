@@ -184,16 +184,6 @@ const fetchSong = async (id) => {
   const data = await getSongsById(id);
   console.log("data", data);
   const data2 = await generatePresignedURL(data.songName);
-<<<<<<< Updated upstream
-  const response = await axios({
-    url: data2,
-    method: 'GET',
-    responseType: 'arraybuffer',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'mp3'
-    }
-=======
   // const response = await axios.get(data2);
   // const response = await axios({
   //   url: data2,
@@ -203,7 +193,6 @@ const fetchSong = async (id) => {
   //     'Content-Type': 'application/json',
   //     'Accept': 'mp3'
   //   }
->>>>>>> Stashed changes
 
   // })
   console.log(data2)
