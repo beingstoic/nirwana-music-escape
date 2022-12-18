@@ -17,9 +17,8 @@ router
   .post(async (req, res) => {
     try{
       // TO DO: ADD re.body field validation in another try cath
-
-      console.log("req.body",req.body)
-      let response = await songsData.uploadSong(req.body);
+      var obj = JSON.parse(req.body.body)
+      let response = await songsData.uploadSong(obj);
       return res.status(201).json(response);
     } catch (error) {
       console.log("error",error)
@@ -42,7 +41,6 @@ router
   .route("/:id")
   .get(async (req, res) => {
     try{
-      console.log("here")
       // TO DO: ADD id validation in another try cath
 
       let response = await songsData.fetchSong(req.params.id);
