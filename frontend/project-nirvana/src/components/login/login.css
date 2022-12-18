@@ -57,3 +57,7 @@ label {
 .error {
   color: #ba3939;
 }
+
+.spaces {
+  padding-right: 150px;
+}

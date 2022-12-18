@@ -67,9 +67,9 @@ const Register = ({ userData, userRegistrationAPICall }) => {
 
   return (
     <div className='Auth-form-container'>
-      <div>
-      <h1>Sign up with your email and password</h1>
-      <CustomButton onClick={handleRequest}> Or Login </CustomButton>
+      <div className='spaces'>
+        <h1>Sign up with your email and password</h1>
+        <CustomButton onClick={handleRequest}> Or Login </CustomButton>
       </div>
 
       <form className='Auth-form' onSubmit={handleSubmit}>

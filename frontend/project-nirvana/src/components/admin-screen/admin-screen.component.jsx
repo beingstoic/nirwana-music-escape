@@ -56,7 +56,7 @@ const AdminScreen = (props) => {
   return (
     <div className='Auth-form-container'>
       
-      <div>
+      <div className='spaces'>
       <h1>Delete song from Nirwana</h1>
       <CustomButton onClick={handleRequest}> Or Upload Songs </CustomButton>
 
