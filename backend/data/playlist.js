@@ -66,16 +66,25 @@ const deleteSongs = async(playlistId, songId)=>{
 const createPlaylist = async (userId, obj) => {
     validation.checkObjectId(userId)
     validation.checkPlistObj(obj)
-    let playlist = await createPlaylistObject(obj);   
+
+    let newPlaylist = {
+      _id:new  ObjectId(),
+      playlistName: obj.playlistName,
+      description: obj.description,
+      songs: obj.songs
+    }
+    console.log(newPlaylist)
+    let playlist = await createPlaylistObject(newPlaylist);   
     const users = await userCollection();
-    const user = await users.findOne({ _id: new ObjectId(userId)})
+    let user = await users.findOne({ _id: new ObjectId(userId)})
     if (user == null) throw "No user with that id";
     //could consider duplicate playlistName here, $addtoSet won't need
     //if(playlist.playlistName==user.playlist[0].playlistName) throw "this playlistName already exist"
     const updateInfo = await users.updateOne(
         {_id: ObjectId(userId)},
-        {$addToSet: {playlist: playlist}}
+        {$addToSet: {playlist: newPlaylist}}
     );
+    user = await users.findOne({ _id: new ObjectId(userId)})
     if (updateInfo.modifiedCount === 0) throw " Could not add playlist successfully "
     return user['playlist'];
     };
@@ -90,9 +99,15 @@ const getAllPlaylist = async (userId) => {
     const allPlaylist = await playlists.find(
         {_id : ObjectId(userId)}, 
         {projection:{playlist:1, _id:0}}).toArray();
-
+  
     if(allPlaylist[0].playlist.length === 0) throw " No playlist yet "
-    return allPlaylist[0].playlist;
+    let fetchedPlaylists =  allPlaylist[0].playlist
+    for(let i=0; i<allPlaylist[0].playlist.length;i++){
+      for(let j=0; j<fetchedPlaylists[i].songs.length; j++){
+        fetchedPlaylists[i].songs[j] = await songsData.getSongsById(fetchedPlaylists[i].songs[j])
+      }
+    };
+    return fetchedPlaylists;
 }
 
 const deletePlaylist = async (playlistId)=>{
