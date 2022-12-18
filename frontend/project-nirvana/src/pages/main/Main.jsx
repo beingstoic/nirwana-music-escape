@@ -20,12 +20,14 @@ const Main = ({ userData }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    if (userData.user.userLoggedIn == true) {
-      if (userData.user.data.role == "admin"){
-        setIsAdmin(true)
+    if (userData.user.userLoggedIn === true) {
+      if (userData.user.data.role === "admin") {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
       }
       setIsLoggedIn(true);
-    } else if (userData.user.userLoggedIn == false) {
+    } else if (userData.user.userLoggedIn === false) {
       setIsLoggedIn(false);
     }
   }, [userData]);
@@ -38,7 +40,7 @@ const Main = ({ userData }) => {
           {isLoggedIn && (<Header />)}
           <Routes>
             {isLoggedIn && <Route path="/dashboard" element={<Homepage />}></Route>}
-            <Route path="/" element={<ReroutePage />}></Route> 
+            <Route path="/" element={<ReroutePage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
             {isLoggedIn && <Route path="/create-playlist" element={<CreatePlaylist />}></Route>}
