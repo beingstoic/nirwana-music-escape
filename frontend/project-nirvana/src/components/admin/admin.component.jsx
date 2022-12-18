@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import FormInput from '../form-input/form-input.component';
 import FormInput2 from "../form-input2/form-input2.component";
 import CustomButton from '../custom-button/custom-button.component';
-// import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { uploadAPISongCall } from "../../redux/songs/songActions";
 
 import './admin.css';
@@ -25,7 +24,7 @@ const Admin = ({ songData, uploadAPISongCall }) => {
     if (songData.playerSong.songUploadData && songData.playerSong.status == "OK") {
       navigate("/admin-portal");
     } else if (songData.playerSong.songUploadError) {
-      setErrorMessage('Error: '+ songData.playerSong.songUploadError);
+      setErrorMessage('Error: ' + songData.playerSong.songUploadError);
     }
   }, [songData]);
 
@@ -71,9 +70,19 @@ const Admin = ({ songData, uploadAPISongCall }) => {
       setArtist(value);
     }
   };
+
+
+  const handleRequest = () => {
+    navigate("/admin-portal");
+  };
+
   return (
     <div className='Auth-form-container'>
+      <div>
       <h1>Upload song to Nirwana</h1>
+      <CustomButton onClick={handleRequest}> Or Delete Songs </CustomButton>
+      </div>
+
       <form onSubmit={handleSubmit} className='Auth-form'>
         <div className="Auth-form-content">
 
@@ -93,7 +102,6 @@ const Admin = ({ songData, uploadAPISongCall }) => {
             label='Upload Song'
             required
           />
-          {/* <input name='song' type="file" value={song} accept="audio/mp3" onChange={handleChange} label='Upload Song' required/> */}
           <FormInput
             name='genre'
             type='text'
@@ -110,14 +118,13 @@ const Admin = ({ songData, uploadAPISongCall }) => {
             label='Enter Artist'
             required
           />
-                    {errorMessage && (
+          {errorMessage && (
             <p className="error"> {errorMessage} </p>
           )}
           <div className='buttons'>
             <CustomButton type='submit'> Upload </CustomButton>
-            {/* <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-              Sign in with Google
-            </CustomButton> */}
+            
+
           </div>
         </div>
       </form>
