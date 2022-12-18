@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import { FormData } from 'form-data';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 
 import FormInput from '../form-input/form-input.component';

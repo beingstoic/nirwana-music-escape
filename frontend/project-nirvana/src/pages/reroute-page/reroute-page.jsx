@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import SongCategory from '../../components/song-category/SongCategory';
-import { fetchSongsAPICall } from '../../redux/generic/action';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import './reroute-page.css';
 
-const ReRoute = ({ fetchSongsAPICall, userData }) => {
-
+const ReRoute = ({ userData }) => {
   const [isLogin, setIsLogin] = useState(false);
   let navigate = useNavigate();
 
   useEffect(() => {
-    if (userData.user.data && userData.user.userLoggedIn == true) {
+    if (userData.user.data && userData.user.userLoggedIn === true) {
       setIsLogin(true);
       navigate("/dashboard");
-    } else {
+    } else if (userData.user.data && userData.user.userLoggedIn === false){
       setIsLogin(false);
       navigate("/login");
     }
@@ -28,7 +25,7 @@ const ReRoute = ({ fetchSongsAPICall, userData }) => {
           <h1>Please access a correct route</h1>
         )
       }
-      </div>
+    </div>
   );
 };
 

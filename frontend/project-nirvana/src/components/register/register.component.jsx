@@ -1,21 +1,30 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { connect } from 'react-redux';
 import { useNavigate  } from 'react-router-dom';
-
+import { userRegistrationAPICall } from '../../redux/users/userActions';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-// import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import './register.css';
 
-const Register = () => {
+const Register = ({ userData, userRegistrationAPICall }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData.user.data && userData.user.status === "OK" && userData.user.error === "") {
+        navigate("/login");
+    } else if (userData.user.error !== "") {
+      setErrorMessage('Please provide a correct input');
+    }
+  }, [userData]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -25,43 +34,30 @@ const Register = () => {
       return;
     }
 
-    try {
-      // const { user } = await auth.createUserWithEmailAndPassword(
-      //   email,
-      //   password
-      // );
-
-      // await createUserProfileDocument(user, { firstName });
-
-      let resp = await axios.post('http://localhost:3000/register', {
-        firstName: firstName,
-        lastName: lastName,
-        userName: email,
-        password: password,
-        phoneNumber: phoneNumber
-      });
-      navigate("/login");
-
-    } catch (error) {
-      console.error(error);
+    const respObj = {
+      firstName: firstName,
+      lastName: lastName,
+      userName: email,
+      password: password,
+      phoneNumber: phoneNumber,
+      role: "user"
     }
+    userRegistrationAPICall(respObj)
   };
 
   const handleChange = event => {
     const { name, value } = event.target;
-
-    // this.setState({ [name]: value });
-    if (name == 'firstName'){
+    if (name === 'firstName'){
       setFirstName(value)
-    } else if ( name == 'lastName'){
+    } else if ( name === 'lastName'){
       setLastName(value)
-    } else if (name == 'email'){
+    } else if (name === 'email'){
       setEmail(value)
-    } else if ( name == 'password'){
+    } else if ( name === 'password'){
       setPassword(value)
-    } else if (name == 'confirmPassword'){
+    } else if (name === 'confirmPassword'){
       setConfirmPassword(value)
-    } else if ( name == 'phoneNumber'){
+    } else if ( name === 'phoneNumber'){
       setPhoneNumber(value)
     }
   };
@@ -119,7 +115,10 @@ const Register = () => {
             label='Enter Phone Number'
             required
           />
-          <CustomButton type='submit'>REGISTER</CustomButton>
+          {errorMessage && (
+            <p className="error"> {errorMessage} </p>
+          )}
+          <CustomButton type='submit'>Register</CustomButton>
           </div>
 
         </form>
@@ -128,4 +127,19 @@ const Register = () => {
 
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    userData: state
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    userRegistrationAPICall: (obj) => dispatch(userRegistrationAPICall(obj))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);

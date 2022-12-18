@@ -76,5 +76,6 @@ export const loginUserAPICall = (obj) => {
 export const logoutCall = (obj) => {
     return async (dispatch) => {
         dispatch(userLogout());
+        localStorage.removeItem("authToken");
     };
 };

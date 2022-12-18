@@ -4,13 +4,14 @@ const initialState = {
     userLoggedIn: false,
     loading: false,
     data: {},
-    error: ''
+    error: '',
+    status: ''
 };
 export const userReducer = (state = (initialState), action) => {
     switch (action.type) {
         case USER_LOGIN_SUCCESS:
             return {
-                ...state, userLoggedIn: true, data: action.payload
+                ...state, userLoggedIn: true, data: action.payload, error: "", status: "OK"
             };
         case USER_LOGIN_FALIURE: return {
             ...state, userLoggedIn: false, error: action.payload
@@ -20,7 +21,7 @@ export const userReducer = (state = (initialState), action) => {
         };
         case USER_REGISTER_SUCCESS:
             return {
-                ...state, user: action.payload
+                ...state, data: action.payload, error: "", status: "OK"
             };
         case USER_REGISTER_FALIURE: return {
             ...state, error: action.payload

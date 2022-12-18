@@ -1,7 +1,6 @@
 .reroute {
-    width: 850px;
-    display: flex;
-    justify-content: space-between;
-    margin: 205px auto;
-  }
-  
+  width: 850px;
+  display: flex;
+  justify-content: space-between;
+  margin: 205px auto;
+}

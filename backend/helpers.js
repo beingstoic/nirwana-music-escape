@@ -211,7 +211,7 @@ const checkUserObject = (user) => {
     throw "Invalid username or password. ";
   username = username.trim().toLowerCase();
   password = password.trim();
-  if (user["role"] == undefined) user.role = "USER";
+  if (user["role"] == undefined) user.role = "user";
   //  isPasswordValid(password);
   let keys = Object.keys(user);
   for (let i = 0; i < keys.length; i++) {
@@ -281,7 +281,7 @@ const validateCreateUserObject = (
       if (role.trim().length == 0 || role.length == 0) {
         throw "role cannot be just empty spaces";
       }
-      if(role!==user || role!==admin){
+      if(role!=="user" || role!=="admin"){
       throw "role must be user or admin"
       }
       if(!role.toLowerCase){

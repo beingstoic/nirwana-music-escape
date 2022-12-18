@@ -21,7 +21,7 @@ const createUserObject=async(obj)=>{
 
 const createUser = async (obj) => {
   let user = await createUserObject(obj);
-  if(typeof obj.role == 'undefined') user.role='USER'
+  if(typeof obj.role == 'undefined') user.role='user'
   checkUserObject(user)
   const users = await userCollection();
   if (await users.findOne({ userName: user.userName })) throw "User already exists";

@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
-
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { loginUserAPICall, userRegistrationAPICall } from '../../redux/users/userActions';
-
-
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 // import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
@@ -22,8 +18,8 @@ const LoginComp = ({ userData, loginUserAPICall }) => {
 
   useEffect(() => {
     console.log("userData.user.data",userData)
-    if (userData.user.data && userData.user.userLoggedIn == true) {
-      if (userData.user.data.role == "admin"){
+    if (userData.user.data && userData.user.userLoggedIn === true) {
+      if (userData.user.data.role === "admin"){
         navigate("/admin");
       } else {
         navigate("/dashboard");
@@ -41,32 +37,22 @@ const LoginComp = ({ userData, loginUserAPICall }) => {
     // } catch (error) {
     //   console.log(error); 
     // }
-
     const loginObj = {
       userName: email,
       password: password
     };
     loginUserAPICall(loginObj);
-    // try {
-    //   let resp = await axios.post('http://localhost:3000/login', {
-    //     userName: email,
-    //     password: password
-    //   });
-    //   console.log("resp", resp);
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const handleChange = event => {
     const { value, name } = event.target;
-    if (name == 'email') {
+    if (name === 'email') {
       setEmail(value);
-    } else if (name == 'password') {
+    } else if (name === 'password') {
       setPassword(value);
     }
   };
+
   return (
     <div className='Auth-form-container'>
       <h1>Sign in with your email and password</h1>
