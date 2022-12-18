@@ -7,23 +7,15 @@ import { useNavigate } from "react-router";
 import axios from 'axios'
 const CreatePlaylist = ({userData, state}) => {
   let navigate = useNavigate()
-  console.log(userData)
-  console.log(state)
   const[options, setOptions] = useState([])
   const loadSongs = async()=>{
     let {data} = await axios.get("http://localhost:3000/songs/fetchSongForPlaylistForm")
-    console.log(data)
     setOptions(data)
   }
-  // let id=''
-  // useEffect(() => {
-  //   id = userData.data._id
-  // }, [userData])
   
   const postPlaylist=async(val)=>{
     console.log(val)
     let id = userData.data._id
-    console.log(id)
     let {data} = await axios.post("http://localhost:3000/playlists/"+id, val)
     console.log(data)
     navigate('/playlists')
@@ -42,7 +34,8 @@ const CreatePlaylist = ({userData, state}) => {
   const [selected, setSelected] = useState([]);
 
   useEffect(()=>{
-    values.songs=selected
+    
+    // values.songs=songs
   },[selected, values])
   const handleNameInputChange = (event) => {
     event.persist();
@@ -60,12 +53,16 @@ const CreatePlaylist = ({userData, state}) => {
   };
 
  
-  const handleRequest = (event) => {
-    const req = {
-      songs:selected,
-      ...values
-    }
-    postPlaylist(values)
+  const handleRequest = () => {
+    // let data = selected.map(select => select.value);
+    // setSelected((val)=>({
+    //   ...data
+    // }))
+    values.songs = selected.map(select => select.value);
+    // call the postPlaylist function with the updated values object
+    postPlaylist(values);
+    // console.log(data)
+    // postPlaylist(values)
   };
   return (
     <>

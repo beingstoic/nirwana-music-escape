@@ -12,18 +12,16 @@ const protect = asyncHandler(async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1]
 
       const decoded = jwt.verify(token, "HeavenOnEarth")
-
+      req.decodedId = decoded
       next()
     } catch (error) {
       console.log(error)
-      res.status(401)
-      throw new Error('Not authorized')
+      return res.status(401).json('Invalid credentials, please login again')
     }
   }
 
   if (!token) {
-    res.status(401)
-    throw new Error('Not authorized, no token')
+    return res.status(401).json('Not authorized, no token')
   }
 })
 

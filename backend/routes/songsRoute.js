@@ -7,7 +7,7 @@ const songsData = data.songsData;
 router
   .route("/")
   .get(async (req, res) => {
-    try{
+    try {
       let response = await songsData.fetchSongs(req.query.sort_by);
       return res.status(200).json(response);
     } catch (error) {
@@ -15,44 +15,45 @@ router
     }
   })
   .post(async (req, res) => {
-    try{
+    try {
       // TO DO: ADD re.body field validation in another try cath
-      var obj = JSON.parse(req.body.body)
+      var obj = JSON.parse(req.body.body);
       let response = await songsData.uploadSong(obj);
       return res.status(201).json(response);
     } catch (error) {
-      console.log("error",error)
+      console.log("error", error);
       return res.status(400).json(error);
     }
-  })
+  });
 
-  router
+router
   .route("/fetchSongForPlaylistForm")
   .get(async (req, res) => {
-    try{
-      console.log("here")
+    try {
+      console.log("here");
       let response = await songsData.fetchSongForPlaylistForm();
       return res.status(200).json(response);
     } catch (error) {
       return res.status(400);
     }
-  })
+  });
+
 router
   .route("/:id")
   .get(async (req, res) => {
-    try{
+    try {
       // TO DO: ADD id validation in another try cath
 
       let response = await songsData.fetchSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
-      console.log("error",error)
+      console.log("error", error);
       return res.status(400).json(error);
     }
   })
   .delete(async (req, res) => {
-    try{
-    // TO DO: ADD id fiekld validation in another try cath
+    try {
+      // TO DO: ADD id fiekld validation in another try cath
 
       let response = await songsData.deleteSong(req.params.id);
       return res.status(200).json(response);
@@ -61,12 +62,6 @@ router
     }
   });
 
-  
-
-
-
 module.exports = router;
-
-
 
 // handle response codes

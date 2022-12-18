@@ -9,7 +9,7 @@ const asyncHandler = require('express-async-handler')
 const { isProperString, isPasswordValid, validateUsernameNPassword } = require("../helpers");
 
 
-const protectedArea= asyncHandler(async (req, res) => {
+const protectedArea= asyncHandler(async (req, res) => { 
   res.status(200).send("user protected area");
 })
 
@@ -42,7 +42,6 @@ router
   });
 
 router.route("/login").post(async (req, res) => {
- 
   let userName = req.body.userName;
   let password = req.body.password;
   try {
