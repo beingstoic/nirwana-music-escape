@@ -59,7 +59,7 @@ const LoginComp = ({ userData, loginUserAPICall }) => {
 
   return (
     <div className='Auth-form-container'>
-      <div>
+      <div className='spaces'>
       <h1>Sign in with your email and password</h1>
       <CustomButton onClick={handleRequest}> Or Register </CustomButton>
       </div>

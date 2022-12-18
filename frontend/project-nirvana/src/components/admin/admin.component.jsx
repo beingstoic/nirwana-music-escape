@@ -78,7 +78,7 @@ const Admin = ({ songData, uploadAPISongCall }) => {
 
   return (
     <div className='Auth-form-container'>
-      <div>
+      <div className='spaces'>
       <h1>Upload song to Nirwana</h1>
       <CustomButton onClick={handleRequest}> Or Delete Songs </CustomButton>
       </div>
