@@ -11,7 +11,7 @@ async function main() {
   const newuserobj = {
     firstName: "sky",
     lastName: "Doe",
-    userName: "skyone",
+    userName: "skyone@gmail.com",
     password: "Abc123@)",
     role: "free",
     profileImage:"",
