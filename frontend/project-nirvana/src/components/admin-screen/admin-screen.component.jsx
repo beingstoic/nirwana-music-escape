@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from '../custom-button/custom-button.component';
+
 import './admin-screen.css';
 
 const AdminScreen = (props) => {
@@ -47,9 +49,18 @@ const AdminScreen = (props) => {
     }
   };
 
+  const handleRequest = () => {
+    navigate("/admin");
+  };
+
   return (
     <div className='Auth-form-container'>
+      
+      <div>
       <h1>Delete song from Nirwana</h1>
+      <CustomButton onClick={handleRequest}> Or Upload Songs </CustomButton>
+
+      </div>
       <form onSubmit={handleSubmit} className='Auth-form'>
         <div className="Auth-form-content">
 
