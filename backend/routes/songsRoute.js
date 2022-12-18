@@ -11,7 +11,7 @@ router
       let response = await songsData.fetchSongs(req.query.sort_by);
       return res.status(200).json(response);
     } catch (error) {
-      return res.send(400).json(error);
+      return res.status(400).json(error);
     }
   })
   .post(async (req, res) => {
@@ -23,7 +23,7 @@ router
       return res.status(201).json(response);
     } catch (error) {
       console.log("error",error)
-      return res.send(400).json(error);
+      return res.status(400).json(error);
     }
   })
 
@@ -35,7 +35,7 @@ router
       let response = await songsData.fetchSongForPlaylistForm();
       return res.status(200).json(response);
     } catch (error) {
-      return res.sendStatus(400);
+      return res.status(400);
     }
   })
 router
@@ -49,7 +49,7 @@ router
       return res.status(200).json(response);
     } catch (error) {
       console.log("error",error)
-      return res.send(400).json(error);
+      return res.status(400).json(error);
     }
   })
   .delete(async (req, res) => {
@@ -59,7 +59,7 @@ router
       let response = await songsData.deleteSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
-      return res.send(400).json(error);
+      return res.status(400).json(error);
     }
   });
 
