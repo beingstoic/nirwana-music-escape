@@ -11,6 +11,8 @@ const axios = require('axios');
 const songs = mongoCollections.songs_collection;
 const Path = require('path');
 
+const { inputStringValidation } = require("../helpers");
+
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
@@ -19,16 +21,6 @@ const s3 = new AWS.S3({
   accessKeyId: "AKIA46ESQPY7OMW7MQ4B",
   secretAccessKey: "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"
 });
-
-const inputStringValidation = (input, inputString) => {
-  if (typeof input == "undefined" || input == null) {
-    throw "Input string - " + inputString + " is empty";
-  } else if (typeof input != "string") {
-    throw "Input string - " + inputString + " is not of proper type string";
-  } else if (input.trim().length <= 0) {
-    throw "Input string - " + inputString + " is empty";
-  }
-};
 
 const getSongsById = async (id) => {
   inputStringValidation(id, "id");
@@ -64,7 +56,7 @@ const uploadFile = async (file, fileName) => {
   return s3.upload(params, function (err, data) {
     if (err) {
       console.log("Error", err);
-      // TO DO: return error
+      throw err
     } if (data) {
       console.log("Upload Success", data.Location);
       return data.Location;
@@ -75,8 +67,12 @@ const uploadFile = async (file, fileName) => {
 
 const uploadSong = async (obj) => {
   // TO DO: add obj validation
-  // TO DO: check if song already exists in database
-  console.log("obj", obj);
+  const songsCollection = await songs();
+  const song = await songsCollection.findOne({songName:obj.songName});
+  console.log(song,"songName")
+  if (song !== null) {
+    throw 'song already exists';
+  }
   const s3ReturnObj = await uploadFile(obj.song, obj.songName);
   console.log("s3ReturnObj", s3ReturnObj);
   const today = moment(new Date()).format("MM/DD/YYYY");
@@ -90,7 +86,6 @@ const uploadSong = async (obj) => {
     artist: obj.artist,
     createdAt: today
   };
-  const songsCollection = await songs();
 
   const insertInfo = await songsCollection.insertOne(newSong);
   if (!insertInfo.acknowledged || !insertInfo.insertedId) {
@@ -103,13 +98,7 @@ const uploadSong = async (obj) => {
 
 
 const seedSongs = async (obj) => {
-  console.log("obj", obj);
-  // const s3ReturnObj = await uploadFile(obj.song, obj.songName);
-  // console.log("s3ReturnObj", s3ReturnObj);
   const today = moment(new Date()).format("MM/DD/YYYY");
-
- // const songUrl = "https://" + "nivana-music" + ".s3.amazonaws.com/" + obj.songName + ".mp3";
-
   let newSong = {
     songName: obj.songName,
     songUrl: obj.songUrl,
@@ -187,11 +176,14 @@ const generatePresignedURL = async (path) => {
 
 };
 const fetchSong = async (id) => {
-  // TO: add song id validation
+  inputStringValidation(id, "id");
+  id = id.trim();
+  if (!ObjectId.isValid(id)) {
+    throw 'Invalid Object ID';
+  }
   const data = await getSongsById(id);
   console.log("data", data);
   const data2 = await generatePresignedURL(data.songName);
-  // const response = await axios.get(data2);
   const response = await axios({
     url: data2,
     method: 'GET',
@@ -203,22 +195,6 @@ const fetchSong = async (id) => {
 
   })
   return data2
-  // console.log("response", response.data);
-  const filename = data.songName + ".mp3"
-  const path = Path.resolve(__dirname, '../output',filename);
-  // return new Promise((resolve, reject) => {
-  //   fs.writeFile(path, response.data, (err) => {
-  //     if (err) {
-  //       console.log("err", err);
-  //     } else {
-  //       resolve('./output/'.concat(filename));
-  //     }
-  //   });
-  // });
-
-
-
-  return data;
 };
 
 const deleteSong = async (id) => {

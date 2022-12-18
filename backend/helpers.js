@@ -289,6 +289,16 @@ const validateCreateUserObject = (
       }
 };
 
+const inputStringValidation = (input, inputString) => {
+  if (typeof input == "undefined" || input == null) {
+    throw "Input string - " + inputString + " is empty";
+  } else if (typeof input != "string") {
+    throw "Input string - " + inputString + " is not of proper type string";
+  } else if (input.trim().length <= 0) {
+    throw "Input string - " + inputString + " is empty";
+  }
+};
+
 module.exports = {
   isValidObject,
   isProperString,
@@ -307,6 +317,7 @@ module.exports = {
   checkUserObject,
   checkPlistName,
   checkObjectId,
-  checkPlistObj
+  checkPlistObj,
+inputStringValidation 
 };
 
