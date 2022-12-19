@@ -1,10 +1,10 @@
 .search-area {
     flex: 0.5;
     display: flex;
-    background-color: white;
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 30px;
-    color: gray;
+    color: #767676;
     align-items: center;
   }
   

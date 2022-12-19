@@ -72,7 +72,9 @@ const MusicPlayer = ({playerSong}) => {
       <button className="repeat-button" onClick={toggleRepeat}>
         {repeat ? 'Repeat On' : 'Repeat Off'}
       </button>
+      <label for="musicplayer"></label>
       <input
+      id="musicplayer"
         type="range"
         className="volume-control"
         min="0"

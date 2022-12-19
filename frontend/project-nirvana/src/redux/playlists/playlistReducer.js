@@ -13,7 +13,7 @@ export const playlistReducer = (state=(initialState), action)=>{
                ...state, playlists:action.payload
             }
         case FETCH_PLAYLIST_FALIURE: return {
-            ...state, error:action.payload
+            ...state, error:action.payload.response.data
         }
         default: return state;
     }

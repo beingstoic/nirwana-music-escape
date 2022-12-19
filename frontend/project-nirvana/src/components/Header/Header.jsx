@@ -34,10 +34,10 @@ const Header = ({ userData, logoutCall }) => {
   return (
     <div className="header">
       {!isAdmin && (<SearchArea />)}
-      {firstName && (<h2>Hi, {firstName} {lastName}</h2>)}
+      {firstName && (<h1>Hi, {firstName} {lastName}</h1>)}
       <div className="user-area">
-        <AccountCircleIcon onClick={handleChange} style={{ color: 'white', transform: 'scale(1.5' }} />
-
+        <a className="aTag">Logout</a>
+        <AccountCircleIcon  onClick={handleChange} style={{ color: 'white', transform: 'scale(1.5' }} />
       </div>
     </div>
   );

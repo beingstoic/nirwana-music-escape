@@ -37,7 +37,7 @@ const NavigationSidebar = ({ userData }) => {
 
   return (
     <List className="navbar">
-      {firstName && (<h2>Hi, {firstName} {lastName}</h2>)}
+      {firstName && (<h1>Hi, {firstName} {lastName}</h1>)}
       <Link to="/" style={{ textDecoration: 'none' }}><NavItem option='Home' Icon={HomeIcon} /></Link>
       <Link to="/playlists" style={{ textDecoration: 'none' }}><NavItem option='Your Playlists' Icon={LibraryMusicIcon} /></Link>
       <Link to="/create-playlist" style={{ textDecoration: 'none' }}><NavItem option='Create Playlist' Icon={LibraryMusicIcon} /></Link>

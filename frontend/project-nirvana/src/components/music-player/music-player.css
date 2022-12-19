@@ -3,26 +3,26 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #333;
-    color: #fff;
+    background-color:  #ffffff;
+    color: #767676;
     display: flex;
     align-items: center;
     padding: 10px;
   }
   
   .play-pause-button {
-    background-color: #fff;
+    background-color: #ffffff;
     border: none;
-    color: #333;
+    color: #767676;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
   }
   
   .repeat-button {
-    background-color: #fff;
+    background-color: #ffffff;
     border: none;
-    color: #333;
+    color: #767676;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;

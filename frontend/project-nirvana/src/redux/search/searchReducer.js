@@ -10,7 +10,7 @@ export const  searchReducer = (state=(initialState), action)=>{
                ...state, searchData: action.payload
             }
         case SEARCH_FALIURE: return {
-            ...state, error:action.payload
+            ...state, error:action.payload.response.data
         }
         default: return state;
     }

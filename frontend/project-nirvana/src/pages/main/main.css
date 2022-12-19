@@ -10,8 +10,8 @@
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
-  background-color: rgb(91, 87, 115);
+  background: linear-gradient(transparent, #d1d1d1);
+  background-color: #5b5773
 }
 
 /* @media screen and (max-width: 600px) {

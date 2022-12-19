@@ -79,14 +79,14 @@ const CreatePlaylist = ({userData, state}) => {
         type="text"
         handleChange={handleDescInputChange}
         value={values.desc}
-        label="description:"
+        label="Description:"
         required
       />
       <MultiSelect
         options={options}
         value={selected}
         onChange={setSelected}
-        labelledBy="Select"
+        labelledBy="Select: "
       />
       <button
         onClick={() => {
