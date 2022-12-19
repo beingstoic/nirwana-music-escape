@@ -17,3 +17,5 @@ Later, navigate to localhost:3000 (for backend page & localhost:8081 for fronten
 Use below credentials to login to our website:
  userName: "phill@stevens.edu",
  password: "Abc@12345"
+ 
+ zoom link: https://stevens.zoom.us/rec/share/j1R7kieOB3B7iju2raLmn73hVM0SsffPZ2OsW6O74MAaLKk-D4fiGwrh3ft3IG1h.00zYDyZ4U3hME9m5
