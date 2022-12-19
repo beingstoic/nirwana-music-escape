@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './music-player.css'
 const MusicPlayer = ({playerSong}) => {
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true   );
+  const [isPlaying, setIsPlaying] = useState(false   );
   const [repeat, setRepeat] = useState(false);
   const [volume, setVolume] = useState(1);
   const [musicObj, setMusicObj] = useState("");
@@ -60,8 +60,13 @@ const MusicPlayer = ({playerSong}) => {
         handlePlay()
     }, [playerSong]);
     useEffect(() => {
-      togglePlay()
+      audioRef.current.play();
+      setIsPlaying(true);
   }, [musicObj]);
+  useEffect(()=>{
+    audioRef.current.pause();
+      setIsPlaying(false);
+  },[])
   
   return (
     <div className="music-player">
