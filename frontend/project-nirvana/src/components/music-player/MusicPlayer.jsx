@@ -60,8 +60,10 @@ const MusicPlayer = ({playerSong}) => {
         handlePlay()
     }, [playerSong]);
     useEffect(() => {
-      audioRef.current.play();
-      setIsPlaying(true);
+      if(musicObj!==""){
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
   }, [musicObj]);
   useEffect(()=>{
     audioRef.current.pause();

@@ -49,7 +49,7 @@ export const fetchSongToPlayAPICall = (_id) => {
             let config = {
                 headers:{
                     "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
-                    'content-type': 'text/json'
+                    'content-type': 'application/json'
                 }
             }
         let resp = await axios.get('http://localhost:3000/songs/'+_id, config);
@@ -68,7 +68,7 @@ export const uploadAPISongCall = (obj) => {
             let config = {
                     headers:{
                         "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
-                        'content-type': 'text/json'
+                        'content-type': 'application/json'
                     }
             }
             let resp = await axios.post('http://localhost:3000/songs', obj, config);
