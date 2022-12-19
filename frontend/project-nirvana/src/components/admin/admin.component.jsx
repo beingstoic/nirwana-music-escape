@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import FormInput from '../form-input/form-input.component';
 import FormInput2 from "../form-input2/form-input2.component";
 import CustomButton from '../custom-button/custom-button.component';
-import { uploadAPISongCall } from "../../redux/songs/songActions";
+import { uploadAPISongCall, cleanUploadSong } from "../../redux/songs/songActions";
 
 import './admin.css';
 
-const Admin = ({ songData, uploadAPISongCall }) => {
+const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
 
   const [songName, setSongName] = useState('');
   const [song, setSong] = useState();
@@ -20,8 +20,11 @@ const Admin = ({ songData, uploadAPISongCall }) => {
 
   let navigate = useNavigate();
 
+  // when comes from redirect clean songs data
+
   useEffect(() => {
     if (songData.playerSong.songUploadData && songData.playerSong.status == "OK") {
+      console.log("oh god",songData)
       navigate("/admin-portal");
     } else if (songData.playerSong.songUploadError) {
       setErrorMessage('Error: ' + songData.playerSong.songUploadError);
@@ -39,14 +42,18 @@ const Admin = ({ songData, uploadAPISongCall }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
+    const fileContentStream = await song.stream();
+    console.log("fileContentStream",fileContentStream);
+
+
     var reader = new FileReader();
 
     reader.readAsArrayBuffer(song);
-
+    console.log("reader",reader.result);
 
     let formData = new FormData();
     formData.append('songName', songName);
-    formData.append('song', reader);
+    formData.append('song', fileContentStream);
     formData.append('genre', genre);
     formData.append('artist', artist);
 
@@ -62,6 +69,7 @@ const Admin = ({ songData, uploadAPISongCall }) => {
     if (name == 'songName') {
       setSongName(value);
     } else if (name == 'song') {
+      console.log("files[0]",files[0])
       setSong(files[0]);
       setSongNameByFile(files[0].name);
     } else if (name == 'genre') {
@@ -73,6 +81,7 @@ const Admin = ({ songData, uploadAPISongCall }) => {
 
 
   const handleRequest = () => {
+    console.log("here")
     navigate("/admin-portal");
   };
 
@@ -142,8 +151,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadAPISongCall: (obj) => dispatch(uploadAPISongCall(obj))
-
+    uploadAPISongCall: (obj) => dispatch(uploadAPISongCall(obj)),
+    cleanUploadSong: () => dispatch(cleanUploadSong())
   };
 };
 

@@ -1,10 +1,11 @@
-import { FETCH_SONG_TO_PLAY_SUCCESS, FETCH_SONG_TO_PLAY_FALIURE, FETCH_SONG_TO_PLAY, UPLOAD_SONG, UPLOAD_SONG_FAILURE, UPLOAD_SONG_SUCCESS } from "./songActionTypes";
+import { FETCH_SONG_TO_PLAY_SUCCESS, FETCH_SONG_TO_PLAY_FALIURE, FETCH_SONG_TO_PLAY, UPLOAD_SONG, UPLOAD_SONG_FAILURE, UPLOAD_SONG_SUCCESS, CLEAN_DATA } from "./songActionTypes";
 
 const initialState = {
     playerSong: [],
     songUploadData: {},
     songUploadError: '',
-    status: ''
+    status: '',
+    redirect: false
 };
 export const playerReducer = (state = (initialState), action) => {
     switch (action.type) {
@@ -23,6 +24,9 @@ export const playerReducer = (state = (initialState), action) => {
         };
         case UPLOAD_SONG_FAILURE: return {
             ...state, songUploadError: action.payload.response.data
+        };
+        case CLEAN_DATA: return {
+            ...state, songUploadData: {}
         };
         default: return state;
     }
