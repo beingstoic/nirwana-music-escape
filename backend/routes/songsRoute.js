@@ -94,6 +94,7 @@ router
       return res.status(400).json(error);
     }
     try {
+      helpers.checkObjectId(req.params.id)
       let response = await songsData.fetchSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
@@ -108,13 +109,13 @@ router
       return res.status(401).send(error)
     }
     try {
-      // TO DO: ADD id fiekld validation in another try cath
-
+      // TO DO: ADD id fiekld validation in another try
       helpers.inputStringValidation(req.params.id, "id");
     } catch (error) {
       return res.status(400).json(error);
     }
     try {
+      helpers.checkObjectId(req.params.id)
       let response = await songsData.deleteSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
