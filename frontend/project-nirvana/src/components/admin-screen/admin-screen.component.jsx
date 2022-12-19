@@ -65,7 +65,7 @@ const AdminScreen = (props) => {
       
       <div className='spaces'>
       <h1>Delete song from Nirwana</h1>
-      <CustomButton onClick={handleRequest}> Or Upload Songs </CustomButton>
+      {/* <CustomButton onClick={handleRequest}> Or Upload Songs </CustomButton> */}
 
       </div>
       <form onSubmit={handleSubmit} className='Auth-form'>
@@ -82,9 +82,6 @@ const AdminScreen = (props) => {
                 >
                   Delete
                 </button>
-                {/* <div className='buttons'>
-            <CustomButton type='submit' onClick={() => deleteItem(data.id)}> Delete </CustomButton>
-          </div> */}
               </li>
             ))}
           </div>
