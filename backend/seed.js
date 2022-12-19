@@ -39,16 +39,16 @@ async function main() {
   const romanticsongs = [
     {
       _id: "639e99a025371c73bfc5a19f",
-      songName: "Nostalgia",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Nostalgia.mp3",
+      songName: "88 Keys",
+      songUrl: "https://nivana-music.s3.amazonaws.com/88 Keys.mp3",
       genre: "romance",
       artist: "eyeroze",
       createdAt: "12/15/2022"
     },
     {
       _id: "639e99bb25371c73bfc5a1a0",
-      songName: "Affection",
-      songUrl: "https://nivana-music.s3.amazonaws.com/affection.mp3",
+      songName: "call",
+      songUrl: "https://nivana-music.s3.amazonaws.com/call.mp3",
       genre: "romance",
       artist: "jinsang",
       createdAt: "12/15/2022"
@@ -63,8 +63,8 @@ async function main() {
     },
     {
       _id: "639e9a1025371c73bfc5a1a2",
-      songName: "Can't Take My Eyes off You",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Can't Take My Eyes off You.mp3",
+      songName: "Again",
+      songUrl: "https://nivana-music.s3.amazonaws.com/Again.mp3",
       genre: "romance",
       artist: "craymer",
       createdAt: "12/15/2022"
@@ -78,24 +78,24 @@ async function main() {
   const hiphopsongs = [
     {
       _id: "639e9a3625371c73bfc5a1a3",
-      songName: "$orries",
-      songUrl: "https://nivana-music.s3.amazonaws.com/orries.mp3",
+      songName: "First Heartbreak",
+      songUrl: "https://nivana-music.s3.amazonaws.com/First Heartbreak.mp3",
       genre: "hip hop",
       artist: "jin",
       createdAt: "12/15/2022"
     },
     {
       _id: "639e9a5225371c73bfc5a1a4",
-      songName: "Oblivion",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Oblivion.mp3",
+      songName: "Alone and Lonely",
+      songUrl: "https://nivana-music.s3.amazonaws.com/Alone and Lonely.mp3",
       genre: "hip hop",
       artist: "Rufi-O",
       createdAt: "12/15/2022"
     },
     {
       _id: "639e9a6625371c73bfc5a1a5",
-      songName: "Happiness",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Happiness.mp3",
+      songName: "Backpack City",
+      songUrl: "https://nivana-music.s3.amazonaws.com/Backpack City.mp3",
       genre: "hip hop",
       artist: "Rufi-O",
       createdAt: "12/15/2022"
@@ -116,16 +116,16 @@ async function main() {
     },
     {
       _id: "639e9afc25371c73bfc5a1a7",
-      songName: "Day in Paris",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Day in Paris.mp3",
+      songName: "Brightness",
+      songUrl: "https://nivana-music.s3.amazonaws.com/Brightness.mp3",
       genre: "opera",
       artist: "Llusion",
       createdAt: "12/15/2022"
     },
     {
       _id: "639e9b4625371c73bfc5a1a8",
-      songName: "drift...",
-      songUrl: "https://nivana-music.s3.amazonaws.com/drift....mp3",
+      songName: "Can We Kiss Forever ",
+      songUrl: "https://nivana-music.s3.amazonaws.com/Can We Kiss Forever .mp3",
       genre: "opera",
       artist: "junyii",
       createdAt: "12/15/2022"
@@ -135,42 +135,42 @@ async function main() {
     await songs.seedSongs(operasongs[i]);
   }
 
-  const kpopsongs = [
-    {
-      _id: "639e9b6a25371c73bfc5a1a9",
-      songName: "Backpack City",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Backpack City.mp3",
-      genre: "k-pop",
-      artist: "Flovry",
-      createdAt: "12/15/2022"
-    },
-    {
-      _id: "639b748a04a2e5746d5afec7",
-      songName: "Night Walk",
-      songUrl: "https://nivana-music.s3.amazonaws.com/Night Walk.mp3",
-      genre: "k-pop",
-      artist: "xander",
-      createdAt: "12/15/2022"
-    }
-  ];
-  for (let i = 0; i < kpopsongs.length; i++) {
-    await songs.seedSongs(kpopsongs[i]);
-  }
+  // const kpopsongs = [
+  //   {
+  //     _id: "639e9b6a25371c73bfc5a1a9",
+  //     songName: "Backpack City",
+  //     songUrl: "https://nivana-music.s3.amazonaws.com/Backpack City.mp3",
+  //     genre: "k-pop",
+  //     artist: "Flovry",
+  //     createdAt: "12/15/2022"
+  //   },
+  //   {
+  //     _id: "639b748a04a2e5746d5afec7",
+  //     songName: "Night Walk",
+  //     songUrl: "https://nivana-music.s3.amazonaws.com/Night Walk.mp3",
+  //     genre: "k-pop",
+  //     artist: "xander",
+  //     createdAt: "12/15/2022"
+  //   }
+  // ];
+  // for (let i = 0; i < kpopsongs.length; i++) {
+  //   await songs.seedSongs(kpopsongs[i]);
+  // }
 
-  const newplaylistobj = {
-    playlistName: "newPlist",
-    description: "new playlist for skyone",
-    songs: ["639e9a5225371c73bfc5a1a4", "639e9afc25371c73bfc5a1a7"]
-  };
-  await playlist.createPlaylist(id, newplaylistobj);
+  // const newplaylistobj = {
+  //   playlistName: "newPlist",
+  //   description: "new playlist for skyone",
+  //   songs: ["639e9a6625371c73bfc5a1a5", "639e9ade25371c73bfc5a1a6"]
+  // };
+  // await playlist.createPlaylist(id, newplaylistobj);
 
-  const anotherplaylistobj = {
-    playlistName: "anoPlist",
-    description: "another playlist for skyone",
-    songs: ["639b748a04a2e5746d5afec7", "639e9b6a25371c73bfc5a1a9", "639e9a1025371c73bfc5a1a2"]
-  };
+  // const anotherplaylistobj = {
+  //   playlistName: "anoPlist",
+  //   description: "another playlist for skyone",
+  //   songs: ["639e9a6625371c73bfc5a1a5", "639e9a3625371c73bfc5a1a3", "639e99bb25371c73bfc5a1a0"]
+  // };
 
-  await playlist.createPlaylist(id, anotherplaylistobj);
+  // await playlist.createPlaylist(id, anotherplaylistobj);
 
 
   console.log('Done seeding database');
