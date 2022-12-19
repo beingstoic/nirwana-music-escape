@@ -88,7 +88,6 @@ router
     }
     try {
       // TO DO: ADD id validation in another try cath
-
       helpers.inputStringValidation(req.params.id, "id");
     } catch (error) {
       return res.status(400).json(error);
@@ -115,6 +114,7 @@ router
       return res.status(400).json(error);
     }
     try {
+      // TO DO: ADD id fiekld validation in another try cath
       helpers.checkObjectId(req.params.id)
       let response = await songsData.deleteSong(req.params.id);
       return res.status(200).json(response);
