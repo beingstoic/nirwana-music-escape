@@ -9,14 +9,26 @@ const CreatePlaylist = ({userData, state}) => {
   let navigate = useNavigate()
   const[options, setOptions] = useState([])
   const loadSongs = async()=>{
-    let {data} = await axios.get("http://localhost:3000/songs/fetchSongForPlaylistForm")
+    let config = {
+      headers:{
+          "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+          'content-type': 'text/json'
+      }
+    }
+    let {data} = await axios.get("http://localhost:3000/songs/fetchSongForPlaylistForm", config)
     setOptions(data)
   }
   
   const postPlaylist=async(val)=>{
     console.log(val)
+    let config = {
+      headers:{
+          "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+          'content-type': 'application/json'
+      }
+  }
     let id = userData.data._id
-    let {data} = await axios.post("http://localhost:3000/playlists/"+id, val)
+    let {data} = await axios.post("http://localhost:3000/playlists/", val, config)
     console.log(data)
     navigate('/playlists')
   }

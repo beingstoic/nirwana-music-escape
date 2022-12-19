@@ -65,6 +65,7 @@ export const loginUserAPICall = (obj) => {
         dispatch(userLogin());
         try {
             let resp = await axios.post('http://localhost:3000/login', obj);
+            sessionStorage.setItem('token', resp.data.token)
             dispatch(userLoginSuccess(resp.data));
         } catch (error) {
             dispatch(userLoginFailure(error));

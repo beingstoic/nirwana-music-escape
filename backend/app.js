@@ -7,6 +7,12 @@ const configRoutes = require('./routes');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const {protect} = require('./middleware/authJwt')
+	app.use(express.json());
+	app.use(express.urlencoded({ extended: true }));
+	app.use(cors({
+		exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar', 'Authorization '],
+	  }))
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

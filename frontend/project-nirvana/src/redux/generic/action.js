@@ -23,7 +23,13 @@ export const fetchSongsAPICall = () => {
     return async (dispatch) => {
         dispatch(fetchSongs());
         try {
-            let resp = await axios.get('http://localhost:3000/songs?sort_by=genre');
+            let config = {
+                headers:{
+                    "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+                    'content-type': 'text/json'
+                }
+        }
+            let resp = await axios.get('http://localhost:3000/songs?sort_by=genre', config);
             dispatch(fetchSongsSuccess(resp.data));
         } catch (error) {
             console.log(error);

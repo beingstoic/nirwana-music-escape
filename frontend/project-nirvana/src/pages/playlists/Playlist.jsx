@@ -7,7 +7,7 @@ const Playlist = ({userData, playlists, fetchPlaylistsAPICall}) => {
   console.log(playlists)
   useEffect(() => {
     let id = userData.data._id
-    fetchPlaylistsAPICall(id);
+    fetchPlaylistsAPICall();
   }, []);
   return (
     <div style={{ display: 'grid', gridGap: '20px' }}>
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPlaylistsAPICall: (id) => dispatch(fetchPlaylistsAPICall(id))
+    fetchPlaylistsAPICall: () => dispatch(fetchPlaylistsAPICall())
   };
 };
 
