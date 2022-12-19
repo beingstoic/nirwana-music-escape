@@ -13,7 +13,6 @@ const SearchArea = ({ makeSearch }) => {
   function handleChange(event) {
     // if(event.target.value.trim().length==0) return
     setSearchInput(event.target.value);
-    console.log(event.target.value);
 
   }
   useEffect(() => {

@@ -18,10 +18,33 @@ router
       let response = await songsData.fetchSongs(req.query.sort_by);
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(400).json(error);
+      if (error !== "Could not get all songs") {
+        return res.status(500).json("Internal Server Error");
+      } else {
+        return res.status(400).json(error);
+      }
     }
   })
   .post(async (req, res) => {
+    // let { body } = req.body;
+    // body {"songName":"Break My Heart Again","song":"[object FileReader]","genre":"k-pop","artist":"90degree"}
+    // if (Object.keys(body).length === 0){
+    //   return res.status(400).json("Invalid Data");
+    // }
+    // var obj = JSON.parse(body);
+    // let { songName, song, genre, artist } = req.body;
+
+    // try {
+    //   // TO DO: ADD re.body field validation in another try cath
+    //   // validation
+    //   helpers.inputStringValidation(songName, "songName");
+    //   helpers.inputStringValidation(song, "song");
+    //   helpers.inputStringValidation(genre, "genre");
+    //   helpers.inputStringValidation(artist, "artist");
+    // } catch (error) {
+    //   return res.status(400).json(error);
+    // }
+
     try {
       let token = protect(req.headers)
       req.user = token.id
@@ -30,11 +53,9 @@ router
     }
     try {
       // TO DO: ADD re.body field validation in another try cath
-      var obj = JSON.parse(req.body.body);
-      let response = await songsData.uploadSong(obj);
+      let response = await songsData.uploadSong(req.body);
       return res.status(201).json(response);
     } catch (error) {
-      console.log("error", error);
       return res.status(400).json(error);
     }
   });
@@ -49,7 +70,6 @@ router
       return res.status(401).send(error)
     }
     try {
-      console.log("here");
       let response = await songsData.fetchSongForPlaylistForm();
       return res.status(200).json(response);
     } catch (error) {
@@ -68,11 +88,15 @@ router
     }
     try {
       // TO DO: ADD id validation in another try cath
+      helpers.inputStringValidation(req.params.id, "id");
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+    try {
       helpers.checkObjectId(req.params.id)
       let response = await songsData.fetchSong(req.params.id);
       return res.status(200).json(response);
     } catch (error) {
-      console.log("error", error);
       return res.status(400).json(error);
     }
   })
@@ -82,6 +106,12 @@ router
       req.user = token.id
     } catch (error) {
       return res.status(401).send(error)
+    }
+    try {
+      // TO DO: ADD id fiekld validation in another try
+      helpers.inputStringValidation(req.params.id, "id");
+    } catch (error) {
+      return res.status(400).json(error);
     }
     try {
       // TO DO: ADD id fiekld validation in another try cath

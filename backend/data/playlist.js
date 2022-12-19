@@ -75,7 +75,6 @@ const createPlaylist = async (userId, obj) => {
     description: obj.description,
     songs: obj.songs
   };
-  console.log(newPlaylist);
   let playlist = await createPlaylistObject(newPlaylist);
   const users = await userCollection();
   let user = await users.findOne({ _id: new ObjectId(userId) });

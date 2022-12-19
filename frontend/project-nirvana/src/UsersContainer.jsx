@@ -30,7 +30,6 @@ function UsersContainer ({ userData, loginUserAPICall, userRegistrationAPICall }
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     userData: state
   }

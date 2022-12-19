@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import FormInput from '../form-input/form-input.component';
 import FormInput2 from "../form-input2/form-input2.component";
 import CustomButton from '../custom-button/custom-button.component';
-import { uploadAPISongCall } from "../../redux/songs/songActions";
+import { uploadAPISongCall, cleanUploadSong } from "../../redux/songs/songActions";
 
 import './admin.css';
 
-const Admin = ({ songData, uploadAPISongCall }) => {
+const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
 
   const [songName, setSongName] = useState('');
   const [song, setSong] = useState();
@@ -19,6 +19,8 @@ const Admin = ({ songData, uploadAPISongCall }) => {
   const [artist, setArtist] = useState('');
 
   let navigate = useNavigate();
+
+  // when comes from redirect clean songs data
 
   useEffect(() => {
     if (songData.playerSong.songUploadData && songData.playerSong.status == "OK") {
@@ -39,21 +41,13 @@ const Admin = ({ songData, uploadAPISongCall }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    var reader = new FileReader();
-
-    reader.readAsArrayBuffer(song);
-
-
-    let formData = new FormData();
-    formData.append('songName', songName);
-    formData.append('song', reader);
-    formData.append('genre', genre);
-    formData.append('artist', artist);
-
-    const songObj = {
-      body: formDataToJson(formData)
-    };
-    uploadAPISongCall(songObj);
+    const obj = {
+      songName: songName,
+      song: "public/"+songName+".mp3",
+      genre: genre,
+      artist: artist
+    }
+    uploadAPISongCall(obj);
   };
 
   const handleChange = event => {
@@ -94,14 +88,14 @@ const Admin = ({ songData, uploadAPISongCall }) => {
             label='Enter Song Name'
             required
           />
-          <FormInput2
+          {/* <FormInput2
             name='song'
             type='file'
             // value={songNameInFile}
             handleChange={handleChange}
             label='Upload Song'
             required
-          />
+          /> */}
           <FormInput
             name='genre'
             type='text'
@@ -142,8 +136,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadAPISongCall: (obj) => dispatch(uploadAPISongCall(obj))
-
+    uploadAPISongCall: (obj) => dispatch(uploadAPISongCall(obj)),
+    cleanUploadSong: () => dispatch(cleanUploadSong())
   };
 };
 

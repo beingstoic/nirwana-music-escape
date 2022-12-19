@@ -26,7 +26,7 @@ export const makeSearch = (_id) => {
         try {
             dispatch(searchSuccess(_id));
         } catch (error) {
-            console.log(error);
+            dispatch(searchFaliure(error))
         }
     };
 };

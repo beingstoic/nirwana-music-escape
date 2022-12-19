@@ -26,7 +26,6 @@ const createUser = async (obj) => {
   const users = await userCollection();
   if (await users.findOne({ userName: user.userName })) throw "User already exists";
   const insertInfo = await users.insertOne(user);
-  console.log(insertInfo);
   if (!insertInfo.insertedCount == 0) throw "Server Error";
   user['_id'] = insertInfo.insertedId.toString();
   user['token'] = generateToken(insertInfo.insertedId);

@@ -32,7 +32,7 @@ export const fetchSongsAPICall = () => {
             let resp = await axios.get('http://localhost:3000/songs?sort_by=genre', config);
             dispatch(fetchSongsSuccess(resp.data));
         } catch (error) {
-            console.log(error);
+            dispatch(fetchSongsFaliure(error));
         }
     };
 };

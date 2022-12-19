@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_SONG_TO_PLAY_SUCCESS, FETCH_SONG_TO_PLAY_FALIURE, FETCH_SONG_TO_PLAY, UPLOAD_SONG, UPLOAD_SONG_FAILURE, UPLOAD_SONG_SUCCESS } from "./songActionTypes";
+import { FETCH_SONG_TO_PLAY_SUCCESS, FETCH_SONG_TO_PLAY_FALIURE, FETCH_SONG_TO_PLAY, UPLOAD_SONG, UPLOAD_SONG_FAILURE, UPLOAD_SONG_SUCCESS, CLEAN_DATA } from "./songActionTypes";
 
 export const fetchSongToPlay = () => {
     return {
@@ -41,6 +41,12 @@ export const uploadSongFailure = (error) => {
     };
 };
 
+export const cleanData = () => {
+    return {
+        type: CLEAN_DATA
+    };
+};
+
 
 export const fetchSongToPlayAPICall = (_id) => {
     return async (dispatch) => {
@@ -55,7 +61,7 @@ export const fetchSongToPlayAPICall = (_id) => {
         let resp = await axios.get('http://localhost:3000/songs/'+_id, config);
             dispatch(fetchSongToPlaySuccess(resp.data));
         } catch (error) {
-            console.log(error);
+            dispatch(fetchSongToPlayFaliure(error));
         }
     };
 };
@@ -63,12 +69,13 @@ export const fetchSongToPlayAPICall = (_id) => {
 
 export const uploadAPISongCall = (obj) => {
     return async (dispatch) => {
+        // dispatch(cleanData());
         dispatch(uploadSong());
         try {
             let config = {
                     headers:{
                         "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
-                        'content-type': 'text/json'
+                        'content-type': 'application/json'
                     }
             }
             let resp = await axios.post('http://localhost:3000/songs', obj, config);
@@ -77,5 +84,11 @@ export const uploadAPISongCall = (obj) => {
             dispatch(uploadSongFailure(error));
 
         }
+    };
+};
+
+export const cleanUploadSong = () => {
+    return async (dispatch) => {
+        dispatch(cleanData());
     };
 };

@@ -27,6 +27,7 @@
     "express-async-handler": "^1.2.0",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
+    "filereader": "^0.10.3",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "mongodb": "^4.12.0"

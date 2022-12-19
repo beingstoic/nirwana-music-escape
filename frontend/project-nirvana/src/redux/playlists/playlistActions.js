@@ -29,10 +29,9 @@ export const fetchPlaylistsAPICall = () => {
                 }
         }
             let resp = await axios.get('http://localhost:3000/playlists/', config)
-            console.log(resp)
             dispatch(fetchPlaylistsSuccess(resp.data))
         } catch (error) {
-            console.log(error);
+            dispatch(fetchPlaylistsFaliure(error))
         }
     };
 };

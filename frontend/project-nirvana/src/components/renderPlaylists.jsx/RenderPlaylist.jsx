@@ -6,19 +6,9 @@ import SongCard from '../song-card/SongCard'
 import './SongCategory.css'
 
 const RenderPlaylist = ({searchSong, songs, title}) => {
-    //console.log('here')
-//  console.log(props)
- //console.log(items)
-//  useEffect(() => {
-//    if(search)
-//  }, [searchSong])
+
 const [songsForRender, setSongsFormRender]= useState(songs)
  
-// useEffect(() => {
-//     // if (typeof serachSong !== "undefined" && Object.keys(playerSong).length > 0)
-//     console.log(searchSong)
-//   }, [searchSong])
-  console.log(songs)
   return (
     <div className='category-viewer'>
         <h1 className="title">{title}</h1>

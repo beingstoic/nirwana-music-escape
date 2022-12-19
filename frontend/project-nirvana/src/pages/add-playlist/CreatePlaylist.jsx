@@ -20,7 +20,6 @@ const CreatePlaylist = ({userData, state}) => {
   }
   
   const postPlaylist=async(val)=>{
-    console.log(val)
     let config = {
       headers:{
           "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
@@ -29,7 +28,6 @@ const CreatePlaylist = ({userData, state}) => {
   }
     let id = userData.data._id
     let {data} = await axios.post("http://localhost:3000/playlists/", val, config)
-    console.log(data)
     navigate('/playlists')
   }
   const reqBody ={}
@@ -73,7 +71,6 @@ const CreatePlaylist = ({userData, state}) => {
     values.songs = selected.map(select => select.value);
     // call the postPlaylist function with the updated values object
     postPlaylist(values);
-    // console.log(data)
     // postPlaylist(values)
   };
   return (
@@ -112,8 +109,6 @@ const CreatePlaylist = ({userData, state}) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state )
-  // console.log(state)
   return {
     userData: state.user,
     state:state

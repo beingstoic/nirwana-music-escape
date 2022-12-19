@@ -37,7 +37,6 @@ router.route("/login").post(async (req, res) => {
   try {
     validateUsernameNPassword(userName, password);
   } catch (e) {
-    console.log("e",e)
     return res.status(400).json(e);
   }
   try {
