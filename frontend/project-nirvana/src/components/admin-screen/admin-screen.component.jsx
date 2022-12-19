@@ -9,19 +9,21 @@ const AdminScreen = (props) => {
 
   const [genre, setGenre] = useState('');
   const [artist, setArtist] = useState('');
-
-
   const [items, setItems] = useState([]);
 
   let [newitems, setnewitems] = useState([]);
   newitems = items;
 
   const fetchData = async () => {
-    const { data } = await axios.get('http://localhost:3000/songs');
-    console.log("data",data)
+    let config = {
+      headers:{
+          "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+          'content-type': 'application/json'
+      }
+  }
+    const { data } = await axios.get('http://localhost:3000/songs', config);
     // set state with the result
     // setItems(data);
-    console.log("items",items)
     return data;
   };
 
@@ -29,7 +31,6 @@ const AdminScreen = (props) => {
 
     // call the function
     fetchData().then((items) => {
-      console.log("items",items)
       setItems(items)
     });
       // make sure to catch any error
@@ -43,7 +44,13 @@ const AdminScreen = (props) => {
   };
 
   const deleteItem = async (getID) => {
-    let resp = await axios.delete('http://localhost:3000/songs/' + getID);
+    let config = {
+      headers:{
+          "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+          'content-type': 'application/json'
+      }
+  }
+    let resp = await axios.delete('http://localhost:3000/songs/' + getID, config);
     if (resp.status == 200 && resp.statusText == "OK"){
       setItems(newitems.filter((single) => single._id !== getID));
     }

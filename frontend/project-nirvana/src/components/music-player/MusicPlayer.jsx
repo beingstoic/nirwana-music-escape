@@ -50,10 +50,8 @@ const MusicPlayer = ({playerSong}) => {
     //         let {data} = await axios.get('http://localhost:3000/songs/639d36f90714051adb426682');
     //         const blob = new Blob([data], {type: 'audio/mp3' });
     //         const url = URL.createObjectURL(blob);
-    //         console.log("resp", data);
     //         setMusicObj(data)
     //       } catch (error) {
-    //         console.log(error);
     //       }
     // }
     useEffect(() => {

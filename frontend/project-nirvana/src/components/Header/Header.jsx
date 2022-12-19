@@ -15,7 +15,6 @@ const Header = ({ userData, logoutCall }) => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("userData",userData)
     if (userData.user.userLoggedIn === true) {
       if (userData.user.data.role === "admin") {
         setIsAdmin(true);
@@ -26,7 +25,6 @@ const Header = ({ userData, logoutCall }) => {
   }, [userData]);
 
   const handleChange = () => {
-    console.log("here");
     logoutCall();
     navigate("/login");
   };

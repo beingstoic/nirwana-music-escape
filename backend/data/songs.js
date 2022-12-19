@@ -38,78 +38,37 @@ const getSongsById = async (id) => {
   return song;
 };
 
+
 const uploadFile = async (file, fileName) => {
-  console.log("file", file);
-
-  // let reader = new FileReader();
-
-  // reader.readAsText(file);
-  // reader.onload = function() {
-  //   console.log(reader.result);
-  // };
-
-  // reader.onerror = function() {
-  //   console.log(reader.error);
-  // };
-  // const fileContentStream = await file.stream();
-
-  // var fileStream = fs.createReadStream(file);
-  // fileStream.on('error', function (err) {
-  //   console.log('File Error', err);
-  // });
+  var fileStream = fs.createReadStream(file);
+  fileStream.on('error', function (err) {
+    throw "Error"
+  });
   const params = {
     Bucket: "nivana-music", // pass your bucket name
     Key: fileName + ".mp3", // file will be saved as testBucket/contacts.csv
-    Body: file,
+    Body: fileStream,
   };
   // call S3 to retrieve upload file to specified bucket
   return s3.upload(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
       throw err;
     }
     if (data) {
-      console.log("Upload Success", data.Location);
       return data.Location;
     }
   });
 };
 
-// postman works
-// const uploadFile = async (file, fileName) => {
-//   console.log("file", file);
-//   var fileStream = fs.createReadStream(file);
-//   fileStream.on('error', function (err) {
-//     console.log('File Error', err);
-//   });
-//   const params = {
-//     Bucket: "nivana-music", // pass your bucket name
-//     Key: fileName + ".mp3", // file will be saved as testBucket/contacts.csv
-//     Body: fileStream,
-//   };
-//   // call S3 to retrieve upload file to specified bucket
-//   return s3.upload(params, function (err, data) {
-//     if (err) {
-//       console.log("Error", err);
-//       throw err;
-//     }
-//     if (data) {
-//       console.log("Upload Success", data.Location);
-//       return data.Location;
-//     }
-//   });
-// };
+
 const uploadSong = async (obj) => {
-  console.log("obj",obj)
   // TO DO: add obj validation
   const songsCollection = await songs();
   const song = await songsCollection.findOne({ songName: obj.songName });
-  console.log(song, "songName");
   if (song !== null) {
     throw "song already exists";
   }
   const s3ReturnObj = await uploadFile(obj.song, obj.songName);
-  console.log("s3ReturnObj", s3ReturnObj);
   const today = moment(new Date()).format("MM/DD/YYYY");
 
   const songUrl =
@@ -197,7 +156,6 @@ const generatePresignedURL = async (path) => {
   const s3ObjectUrl = parseUrl(
     `https://${bucket}.s3.${region}.amazonaws.com/${path}.mp3`
   );
-  console.log("s3ObjectUrl", s3ObjectUrl);
   const expiryTime = 604790;
   const presigner = new S3RequestPresigner({
     credentials,
@@ -205,10 +163,8 @@ const generatePresignedURL = async (path) => {
     sha256: Hash.bind(null, "sha256"), // In Node.js
     //sha256: Sha256 // In browsers
   });
-  console.log("presigner", presigner);
   // Create a GET request from S3 url.
   const url = await presigner.presign(new HttpRequest(s3ObjectUrl), { expiresIn: expiryTime});
-  console.log("url", formatUrl(url));
   return formatUrl(url);
 };
 
@@ -219,7 +175,6 @@ const fetchSong = async (id) => {
     throw "Invalid Object ID";
   }
   const data = await getSongsById(id);
-  console.log("data", data);
   const data2 = await generatePresignedURL(data.songName);
   // const response = await axios.get(data2);
   // const response = await axios({
@@ -232,7 +187,6 @@ const fetchSong = async (id) => {
   //   }
 
   // })
-  console.log(data2);
   return data2;
 };
 

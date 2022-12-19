@@ -9,7 +9,7 @@ const initialState = {
 };
 export const playerReducer = (state = (initialState), action) => {
     switch (action.type) {
-        case FETCH_SONG_TO_PLAY_SUCCESS: console.log(action.payload);
+        case FETCH_SONG_TO_PLAY_SUCCESS:
             return {
                 ...state, playerSong: action.payload
             };

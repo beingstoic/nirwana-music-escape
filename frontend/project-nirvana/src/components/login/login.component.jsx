@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { loginUserAPICall, userRegistrationAPICall } from '../../redux/users/userActions';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-// import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './login.css';
 
@@ -17,7 +16,6 @@ const LoginComp = ({ userData, loginUserAPICall }) => {
 
 
   useEffect(() => {
-    console.log("userData.user.data", userData);
     if (userData.user.data && userData.user.userLoggedIn === true) {
       if (userData.user.data.role === "admin") {
         navigate("/admin");
@@ -31,12 +29,6 @@ const LoginComp = ({ userData, loginUserAPICall }) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    // try {
-    //   await auth.signInWithEmailAndPassword(email, password);
-    //   this.setState({ email: '', password: '' });
-    // } catch (error) {
-    //   console.log(error); 
-    // }
     const loginObj = {
       userName: email,
       password: password

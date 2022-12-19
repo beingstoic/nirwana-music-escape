@@ -12,7 +12,6 @@ const protect = (headers) => {
       const decoded = jwt.verify(token, "HeavenOnEarth")
       return decoded
     } catch (error) {
-      console.log(error)
       throw ('Invalid credentials, please login again')
     }
   }

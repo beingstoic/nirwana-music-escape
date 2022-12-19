@@ -26,13 +26,12 @@ router
     }
   })
   .post(async (req, res) => {
-    let { body } = req.body;
-    console.log("body", body);
+    // let { body } = req.body;
     // body {"songName":"Break My Heart Again","song":"[object FileReader]","genre":"k-pop","artist":"90degree"}
     // if (Object.keys(body).length === 0){
     //   return res.status(400).json("Invalid Data");
     // }
-    var obj = JSON.parse(body);
+    // var obj = JSON.parse(body);
     // let { songName, song, genre, artist } = req.body;
 
     // try {
@@ -43,7 +42,6 @@ router
     //   helpers.inputStringValidation(genre, "genre");
     //   helpers.inputStringValidation(artist, "artist");
     // } catch (error) {
-    //   console.log("error", error);
     //   return res.status(400).json(error);
     // }
 
@@ -55,10 +53,9 @@ router
     }
     try {
       // TO DO: ADD re.body field validation in another try cath
-      let response = await songsData.uploadSong(obj);
+      let response = await songsData.uploadSong(req.body);
       return res.status(201).json(response);
     } catch (error) {
-      console.log("error", error);
       return res.status(400).json(error);
     }
   });
@@ -73,7 +70,6 @@ router
       return res.status(401).send(error)
     }
     try {
-      console.log("here");
       let response = await songsData.fetchSongForPlaylistForm();
       return res.status(200).json(response);
     } catch (error) {

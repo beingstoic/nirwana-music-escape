@@ -30,7 +30,6 @@ const NavigationSidebar = ({ userData }) => {
   const [lastName, setLastName] = useState('');
 
   useEffect(() => {
-    console.log("userData.user.data", userData);
     if (userData.user.data && userData.user.userLoggedIn === true) {
       if (userData.user.data.role === "user") {
         setFirstName(userData.user.data.firstName);

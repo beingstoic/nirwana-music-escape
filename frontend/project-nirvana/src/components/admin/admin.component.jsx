@@ -24,7 +24,6 @@ const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
 
   useEffect(() => {
     if (songData.playerSong.songUploadData && songData.playerSong.status == "OK") {
-      console.log("oh god",songData)
       navigate("/admin-portal");
     } else if (songData.playerSong.songUploadError) {
       setErrorMessage('Error: ' + songData.playerSong.songUploadError);
@@ -42,25 +41,13 @@ const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    const fileContentStream = await song.stream();
-    console.log("fileContentStream",fileContentStream);
-
-
-    var reader = new FileReader();
-
-    reader.readAsArrayBuffer(song);
-    console.log("reader",reader.result);
-
-    let formData = new FormData();
-    formData.append('songName', songName);
-    formData.append('song', fileContentStream);
-    formData.append('genre', genre);
-    formData.append('artist', artist);
-
-    const songObj = {
-      body: formDataToJson(formData)
-    };
-    uploadAPISongCall(songObj);
+    const obj = {
+      songName: songName,
+      song: "public/"+songName+".mp3",
+      genre: genre,
+      artist: artist
+    }
+    uploadAPISongCall(obj);
   };
 
   const handleChange = event => {
@@ -69,7 +56,6 @@ const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
     if (name == 'songName') {
       setSongName(value);
     } else if (name == 'song') {
-      console.log("files[0]",files[0])
       setSong(files[0]);
       setSongNameByFile(files[0].name);
     } else if (name == 'genre') {
@@ -81,7 +67,6 @@ const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
 
 
   const handleRequest = () => {
-    console.log("here")
     navigate("/admin-portal");
   };
 
@@ -103,14 +88,14 @@ const Admin = ({ songData, uploadAPISongCall, cleanUploadSong }) => {
             label='Enter Song Name'
             required
           />
-          <FormInput2
+          {/* <FormInput2
             name='song'
             type='file'
             // value={songNameInFile}
             handleChange={handleChange}
             label='Upload Song'
             required
-          />
+          /> */}
           <FormInput
             name='genre'
             type='text'

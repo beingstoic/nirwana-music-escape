@@ -1,24 +1,23 @@
-import React, {useEffect} from 'react'
-import {fetchPlaylistsAPICall} from '../../redux/playlists//playlistActions'
+import React, { useEffect } from 'react';
+import { fetchPlaylistsAPICall } from '../../redux/playlists//playlistActions';
 import SongCategory from '../../components/song-category/SongCategory';
 import { connect } from 'react-redux';
 import RenderPlaylist from '../../components/renderPlaylists.jsx/RenderPlaylist';
-const Playlist = ({userData, playlists, fetchPlaylistsAPICall}) => {
-  console.log(playlists)
+const Playlist = ({ userData, playlists, fetchPlaylistsAPICall }) => {
   useEffect(() => {
-    let id = userData.data._id
+    let id = userData.data._id;
     fetchPlaylistsAPICall();
   }, []);
   return (
     <div style={{ display: 'grid', gridGap: '20px' }}>
       {
-        playlists.playlists.filter(playlist=>playlist.songs.length>=1).map(playlist => <RenderPlaylist key={playlist._id}
+        playlists.playlists.filter(playlist => playlist.songs.length >= 1).map(playlist => <RenderPlaylist key={playlist._id}
           title={playlist.playlistName}
           songs={playlist.songs} />)
       }
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => {
   return {
