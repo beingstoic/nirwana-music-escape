@@ -6,7 +6,7 @@
 .group .form-input {
 	background: none;
 	background-color: white;
-	color: grey;
+	color: #d1d1d1;
 	font-size: 18px;
 	padding: 10px 10px 10px 5px;
 	display: block;
@@ -32,7 +32,7 @@
 }
 
 .group .form-input-label {
-	color: grey;
+	color:#d1d1d1;
 	font-size: 16px;
 	font-weight: normal;
 	position: absolute;

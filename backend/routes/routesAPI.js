@@ -14,23 +14,20 @@ const protectedArea= asyncHandler(async (req, res) => {
 
 router
   .route("/register")
-  .get(async (req, res) => {
-    res.render("userRegister", { title: "Register" });
-  })
-  .post(async (req, res) => {
+  .post(async (req, res) => { // IMPORTANT
     try {
       let userName = req.body.userName;
       let password = req.body.password
       validateUsernameNPassword(userName, password);
     } catch (e) {
 
-      res.status(400).json(e);//using send will crash the code in edge case
+      res.status(400).json(e);
     }
     try{
       let response = await usersData.createUser(req.body);
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(400).json(error);//using send will crash the code in edge case
+      return res.status(400).json(error);
     }
   });
 
@@ -41,7 +38,7 @@ router.route("/login").post(async (req, res) => {
     validateUsernameNPassword(userName, password);
   } catch (e) {
     console.log("e",e)
-    return res.status(400).json(e);//using send will crash the code in edge case
+    return res.status(400).json(e);
   }
   try {
     let response = await usersData.checkUser(userName, password);

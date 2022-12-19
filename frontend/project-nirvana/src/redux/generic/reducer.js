@@ -9,7 +9,7 @@ export const songsReducer = (state = (initialState), action) => {
                 ...state, ...action.payload
             };
         case FETCH_SONGS_FALIURE: return {
-            ...state, error: action.payload
+            ...state, error: action.payload.response.data
         };
         default: return state;
     }
