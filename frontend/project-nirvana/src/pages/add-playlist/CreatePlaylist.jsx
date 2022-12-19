@@ -74,7 +74,7 @@ const CreatePlaylist = ({userData, state}) => {
     // postPlaylist(values)
   };
   return (
-    <>
+    <div style={{maxWidth:'60%', alignSelf:'center'}}>
       <FormInput
         name="name"
         type="text"
@@ -104,7 +104,7 @@ const CreatePlaylist = ({userData, state}) => {
       >
         Add
       </button>
-    </>
+      </div>
   );
 };
 
