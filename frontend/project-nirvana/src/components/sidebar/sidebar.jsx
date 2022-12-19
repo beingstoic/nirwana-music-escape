@@ -3,6 +3,9 @@ import List from "@mui/material/List";
 import NavItem from "./NavItem";
 import HomeIcon from "@mui/icons-material/Home";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import "./sidebar.css";
@@ -38,12 +41,13 @@ const NavigationSidebar = ({ userData }) => {
   return (
     <List className="navbar">
       {firstName && (<h2>Hi, {firstName} {lastName}</h2>)}
-      <Link to="/" style={{ textDecoration: 'none' }}><NavItem option='Home' Icon={HomeIcon} /></Link>
-      <Link to="/playlists" style={{ textDecoration: 'none' }}><NavItem option='Your Playlists' Icon={LibraryMusicIcon} /></Link>
-      <Link to="/create-playlist" style={{ textDecoration: 'none' }}><NavItem option='Create Playlist' Icon={LibraryMusicIcon} /></Link>
+      <Link to="/" style={{textDecoration:'none'}}><NavItem option='Home' Icon={HomeIcon}/></Link>
+      <Link to="/playlists" style={{textDecoration:'none'}}><NavItem option='Your Playlists' Icon={LibraryMusicIcon}/></Link>
+      <Link to="/create-playlist" style={{textDecoration:'none'}}><NavItem option='Create Playlist' Icon={PlaylistAddIcon}/></Link>
     </List>
   );
 };
+
 
 
 const mapStateToProps = state => {

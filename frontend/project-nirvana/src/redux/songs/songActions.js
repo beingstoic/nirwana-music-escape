@@ -46,7 +46,13 @@ export const fetchSongToPlayAPICall = (_id) => {
     return async (dispatch) => {
         dispatch(fetchSongToPlay());
         try {
-            let resp = await axios.get('http://localhost:3000/songs/' + _id);
+            let config = {
+                headers:{
+                    "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+                    'content-type': 'text/json'
+                }
+            }
+        let resp = await axios.get('http://localhost:3000/songs/'+_id, config);
             dispatch(fetchSongToPlaySuccess(resp.data));
         } catch (error) {
             console.log(error);
@@ -59,7 +65,13 @@ export const uploadAPISongCall = (obj) => {
     return async (dispatch) => {
         dispatch(uploadSong());
         try {
-            let resp = await axios.post('http://localhost:3000/songs', obj);
+            let config = {
+                    headers:{
+                        "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+                        'content-type': 'text/json'
+                    }
+            }
+            let resp = await axios.post('http://localhost:3000/songs', obj, config);
             dispatch(uploadSongSuccess(resp.data));
         } catch (error) {
             dispatch(uploadSongFailure(error));

@@ -12,11 +12,6 @@ const protectedArea= asyncHandler(async (req, res) => {
   res.status(200).send("user protected area");
 })
 
-// router.route("/").get(async (req, res) => {
-//   if (req.session.user) return res.redirect("/protected");
-//   res.status(401).send('dkjhfrwej');
-// });
-
 router
   .route("/register")
   .get(async (req, res) => {

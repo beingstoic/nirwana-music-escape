@@ -19,11 +19,16 @@ export const fetchPlaylistsFaliure = (error) => {
     };
 };
 
-export const fetchPlaylistsAPICall = (id) => {
+export const fetchPlaylistsAPICall = () => {
     return async (dispatch) => {
         dispatch(fetchPlaylists());
         try {
-            let resp = await axios.get('http://localhost:3000/playlists/'+id)
+            let config = {
+                headers:{
+                    "Authorization": 'Bearer '+ sessionStorage.getItem('token'),
+                }
+        }
+            let resp = await axios.get('http://localhost:3000/playlists/', config)
             console.log(resp)
             dispatch(fetchPlaylistsSuccess(resp.data))
         } catch (error) {
